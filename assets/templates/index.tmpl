@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/@picocss/pico@next/css/pico.min.css"
+    />
+    {{ if .MetaTitle}}<title>{{.MetaTitle}}</title>{{ end }}
+  </head>
+  <body>
+    <main class="container">
+      {{ if .BodyTitle}}<h1>{{.BodyTitle}}</h1>{{ end }}
+      <table class="striped">
+        <thead>
+          <tr>
+            <th scope="col">Package</th>
+            <th scope="col">Source</th>
+            <th scope="col">Documentation</th>
+          </tr>
+        </thead>
+        <tbody>
+{{if .Repos}}
+  {{ range $repo := .Repos }}
+          <tr>
+            <td>
+              <span {{if $repo.Description}}data-tooltip="{{ $repo.Description }}"{{end}}>{{$repo.VanityUrl | urlWithoutProtocol}}</span>
+            </td>
+            <td>
+              <a href="//{{$repo.Url | urlWithoutProtocol}}">{{$repo.Url | urlWithoutProtocol}}</a>
+            </td>
+            <td>
+              <a href="//pkg.go.dev/{{$repo.VanityUrl | urlWithoutProtocol}}">
+                <img
+                  src="//pkg.go.dev/badge/{{$repo.VanityUrl | urlWithoutProtocol}}.svg"
+                  alt="Go Reference"
+                />
+              </a>
+            </td>
+          </tr>
+  {{ end }}
+{{else}}
+<tr>
+  <td colspan="3" style="text-align: center;">No repositories</td>
+</tr>
+{{end}}
+        </tbody>
+      </table>
+    </main>
+  </body>
+</html>

@@ -1,0 +1,11 @@
+<!DOCTYPE html>
+<html>
+  <head>
+  <meta name="go-import" content="{{ .VanityUrl | urlWithoutProtocol }} {{.Protocol}} {{ .Url }}">
+  <meta name="go-source" content="{{ .VanityUrl | urlWithoutProtocol }} {{.Url}} {{.Url}}/tree/{{.Branch}}{/dir} {{.Url}}/{{.Branch}}{/dir}/{file}#L{line}">
+  <meta http-equiv="refresh" content="0; url=https://pkg.go.dev/{{ .VanityUrl | urlWithoutProtocol }}">
+  </head>
+  <body>
+  Nothing to see here. Please <a href="https://pkg.go.dev/{{ .VanityUrl | urlWithoutProtocol }}">move along</a>.
+  </body>
+</html>
