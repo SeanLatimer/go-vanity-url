@@ -16,14 +16,21 @@ import (
 )
 
 var (
+	version = "dev"
+	commit  = "none"
+	date    = "unknown"
+)
+
+var (
 	tmpl       *template.Template
 	configFile string
 	outputDir  string
 )
 
 var rootCmd = &cobra.Command{
-	Use: "vanity-url",
-	Run: run,
+	Use:     "vanity-url",
+	Run:     run,
+	Version: fmt.Sprintf("%s (commit: %s, date: %s)", version, commit, date),
 }
 
 // init initializes the program.

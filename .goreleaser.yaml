@@ -11,8 +11,11 @@ builds:
       - linux
       - windows
       - darwin
-gomod:
-  proxy: true
+    ldflags:
+      - -s -w
+      - -X cmd.version={{ .Version }}
+      - -X cmd.commit={{.ShortCommit}}
+      - -X cmd.date={{ .Date }}
 
 archives:
   - format: tar.gz
@@ -38,3 +41,15 @@ changelog:
     exclude:
       - '^docs:'
       - '^test:'
+
+signs:
+  - cmd: cosign
+    certificate: '${artifact}.pem'
+    output: true
+    artifacts: checksum
+    args:
+      - sign-blob
+      - '--output-certificate=${certificate}'
+      - '--output-signature=${signature}'
+      - '${artifact}'
+      - --yes

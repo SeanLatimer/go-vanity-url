@@ -3,7 +3,6 @@ module github.com/seanlatimer/go-vanity-url
 go 1.20
 
 require (
-	github.com/davecgh/go-spew v1.1.1
 	github.com/rs/zerolog v1.29.1
 	github.com/spf13/cobra v1.7.0
 	github.com/spf13/viper v1.16.0
