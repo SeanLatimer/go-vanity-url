@@ -7,4 +7,5 @@ type Repository struct {
 	Path        string
 	VanityUrl   string `mapstructure:"vanity-url"`
 	Description string
+	Hidden      bool
 }

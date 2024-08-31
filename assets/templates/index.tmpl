@@ -20,30 +20,17 @@
           </tr>
         </thead>
         <tbody>
-{{if .Repos}}
-  {{ range $repo := .Repos }}
-          <tr>
-            <td>
-              <span {{if $repo.Description}}data-tooltip="{{ $repo.Description }}"{{end}}>{{$repo.VanityUrl | urlWithoutProtocol}}</span>
-            </td>
-            <td>
-              <a href="//{{$repo.Url | urlWithoutProtocol}}">{{$repo.Url | urlWithoutProtocol}}</a>
-            </td>
-            <td>
-              <a href="//pkg.go.dev/{{$repo.VanityUrl | urlWithoutProtocol}}">
-                <img
-                  src="//pkg.go.dev/badge/{{$repo.VanityUrl | urlWithoutProtocol}}.svg"
-                  alt="Go Reference"
-                />
-              </a>
-            </td>
-          </tr>
-  {{ end }}
-{{else}}
+{{ $visible := false }}{{ if .Repos }}{{ range $repo := .Repos }}{{ if not $repo.Hidden }}{{ $visible = true }}
+<tr>
+  <td><span{{if $repo.Description}} data-tooltip="{{ $repo.Description }}"{{end}}>{{$repo.VanityUrl | urlWithoutProtocol}}</span></td>
+  <td><a href="//{{$repo.Url | urlWithoutProtocol}}">{{$repo.Url | urlWithoutProtocol}}</a></td>
+  <td><a href="//pkg.go.dev/{{$repo.VanityUrl | urlWithoutProtocol}}"><img src="//pkg.go.dev/badge/{{$repo.VanityUrl | urlWithoutProtocol}}.svg" alt="Go Reference" /></a></td>
+</tr>
+{{ end }}{{ end }}{{ end }}{{ if not $visible }}
 <tr>
   <td colspan="3" style="text-align: center;">No repositories</td>
 </tr>
-{{end}}
+{{ end }}
         </tbody>
       </table>
     </main>
